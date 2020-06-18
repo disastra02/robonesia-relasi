@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\MahasiswaRepositoryInterface;
 use App\Studi;
 use App\Mahasiswa;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\MahasiswaStoreRequest;
 use App\Repositories\MahasiswaRepository;
+use App\Http\Requests\MahasiswaStoreRequest;
+use App\Contracts\MahasiswaRepositoryInterface;
 
 class MahasiswaController extends Controller
 {
@@ -20,9 +21,13 @@ class MahasiswaController extends Controller
 
     public function index()
     {
-        $mahasiswa = $this->mahasiswaRepository->index();
+        if (request()->ajax()) {
+            $mahasiswa = $this->mahasiswaRepository->index();
+            return DataTables::of($mahasiswa)->make(true);
+        }
+        
         // dd($mahasiswa);
-        return view('mahasiswa.index', compact('mahasiswa'));
+        return view('mahasiswa.index');
     }
 
     public function create()

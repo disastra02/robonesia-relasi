@@ -23,6 +23,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('admin' , function() {
+        return 'Ini Halaman Admin';
+    })->middleware('role:admin');
+
+
     Route::group(['prefix' => 'studi' , 'as' => 'studi.'], function () {
         Route::get('/' , 'StudiController@index')->name('index');
         Route::get('/create' , 'StudiController@create')->name('create');
@@ -48,6 +53,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/' , 'NilaiController@index')->name('index');
         Route::get('/create' , 'NilaiController@create')->name('create');
         Route::post('/' , 'NilaiController@store')->name('store');
+    });
+
+    Route::group(['prefix' => 'barang' , 'as' => 'barang.'], function () {
+        Route::get('/' , 'Latihan\BarangController@index')->name('index');
+        Route::get('/create' , 'Latihan\BarangController@create')->name('create');
+        Route::post('/' , 'Latihan\BarangController@store')->name('store');
     });
 });
 

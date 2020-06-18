@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('head')
 </head>
 <body>
     <div id="app">
@@ -47,6 +48,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('nilai.index') }}">Data Nilai</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('barang.index') }}">Data Barang</a>
                         </li>
                     </ul>
 

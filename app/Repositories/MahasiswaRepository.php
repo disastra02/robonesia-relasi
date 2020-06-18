@@ -10,7 +10,7 @@ class MahasiswaRepository implements MahasiswaRepositoryInterface
 {
     public function index()
     {
-        return Mahasiswa::all();
+        return Mahasiswa::with('program')->get();
     }
 
     public function store($data)
